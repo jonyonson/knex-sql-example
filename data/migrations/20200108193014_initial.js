@@ -17,7 +17,9 @@ exports.up = async function(knex) {
       .integer("species_id")
       .notNullable()
       .references("id")
-      .inTable("species");
+      .inTable("species")
+      .onDelete("CASCADE")
+      .onUpdate("CASCADE");
   });
 
   await knex.schema.createTable("zoos_animals", table => {
@@ -25,12 +27,16 @@ exports.up = async function(knex) {
       .integer("zoo_id")
       .notNullable()
       .references("id")
-      .inTable("zoos");
+      .inTable("zoos")
+      .onDelete("CASCADE")
+      .onUpdate("CASCADE");
     table
       .integer("animal_id")
       .notNullable()
       .references("id")
-      .inTable("animals");
+      .inTable("animals")
+      .onDelete("CASCADE")
+      .onUpdate("CASCADE");
     // dates of when the animal was at the zoo
     table.date("from");
     table.date("to");
@@ -41,7 +47,7 @@ exports.up = async function(knex) {
 
 exports.down = async function(knex) {
   await knex.schema.dropTableIfExists("zoos_animals");
-  await knex.schema.dropTableIfExists("species");
   await knex.schema.dropTableIfExists("animals");
+  await knex.schema.dropTableIfExists("species");
   await knex.schema.dropTableIfExists("zoos");
 };
