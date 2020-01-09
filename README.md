@@ -34,3 +34,6 @@ For the animals, the client wants to keep track of:
 Determine the database tables necessary to track this information. Label any relationships between tables.
 
 `npx knex migrate:make initial`
+`npx knex migrate:rollback`
+`npx knex migrate:latest`
+`npx knex seed:run`
